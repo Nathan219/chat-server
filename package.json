@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "101": "^1.6.2",
+    "bluebird": "^3.5.1",
+    "error-cat": "^3.0.0",
+    "express": "^4.16.2",
+    "joi": "^9.0.4",
+    "ponos": "^5.8.3",
+    "rabbitmq-node": "^0.5.0",
+    "socket.io": "^2.0.4"
+  }
+}
