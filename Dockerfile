@@ -7,4 +7,4 @@ RUN npm install
 ARG PORT
 EXPOSE $PORT
 
-CMD npm start
+CMD sleep 10; npm start

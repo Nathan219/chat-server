@@ -4,22 +4,28 @@ services:
     image: postgres
     expose:
       - '5432'
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
   rabbitmq:
     image: rabbitmq:3-management
     expose:
       - '5672'
     ports:
-      - '8000:8000'
+      - '8080:15672'
+    volumes:
+      - ./rabbitmq-data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
   message-store:
     build: ../chat-server-db
+    depends_on:
+      - db
+      - rabbitmq
     environment:
       - DB_URL=db
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_PORT=5672
       - RABBITMQ_PREFETCH=1
-    depends_on:
-      - db
-      - rabbitmq
     links:
       - db
       - rabbitmq
@@ -37,6 +43,10 @@ services:
       - RABBITMQ_PREFETCH=1
     expose:
       - '5000'
+    links:
+      - rabbitmq
+    ports:
+      - '5000:5000'
   ui:
     build:
       context: ../Chat-Tutorial
@@ -44,5 +54,13 @@ services:
         SERVER_URL: 'server:5000'
     depends_on:
       - server
+    environment:
+      - SERVER_URL=server:5000
+    links:
+      - server
+    expose:
+      - '3000'
+    ports:
+      - '3000:3000'
 
 

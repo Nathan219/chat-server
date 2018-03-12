@@ -12,6 +12,10 @@ class RabbitMQ extends RabbitMQClient {
       username: 'guest',
       password: 'guest',
       events: [{
+        name: 'message.received'
+      }, {
+        name: 'messages.requested'
+      }, {
         name: 'message.sent'
       }, {
         name: 'user.connected'
