@@ -42,12 +42,12 @@ class SocketServer {
     return delete this.connectionMap[socketId];
   }
 
-  sendMessage (data) {
-    return this.io.emit('RECEIVE_MESSAGE', data);
+  sendMessage (message) {
+    return this.io.emit('RECEIVE_MESSAGE', message);
   }
 
-  sendMessageToId(id, data) {
-    return this.io.to(id).emit('RECEIVE_MESSAGE', data);
+  sendMessagesToId(id, messages) {
+    return this.io.to(id).emit('MISSED_MESSAGES', messages);
   }
 }
 

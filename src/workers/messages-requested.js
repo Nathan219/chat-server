@@ -1,7 +1,6 @@
 'use strict';
 
 const Joi = require('joi');
-const Promise = require('bluebird');
 const socketServer = require('../util/socket-server');
 
 module.exports.jobSchema = Joi.object({
@@ -17,5 +16,5 @@ module.exports.jobSchema = Joi.object({
 
 module.exports.task = function messagesRequested (job) {
   console.log(job);
-  return Promise.map(job.messages, message => socketServer.sendMessageToId(job.socketId, message));
+  return socketServer.sendMessagesToId(job.socketId, job.messages);
 };
