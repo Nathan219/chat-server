@@ -11,8 +11,10 @@ module.exports.jobSchema = Joi.object({
   created: Joi.date()
 }).required();
 
-
+/**
+ * When a new message was saved to the Db, the message.received event fires.  This worker sends that new message
+ * to all connected clients
+ */
 module.exports.task = function MessageReceived (job) {
-  console.log(job);
   return socketServer.sendMessage(job);
 };

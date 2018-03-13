@@ -25,6 +25,13 @@ class SocketServer {
       });
   }
 
+  /**
+   * When a client has connected, publish the user.connected event and attach the listener for the SEND_MESSAGE event
+   *
+   * @param {Socket} socket
+   *
+   * @returns {undefined}
+   */
   addClient (socket) {
     if (this.connectionMap[socket.id]) {
       return console.error('Client is being added twice!', socket.id);
